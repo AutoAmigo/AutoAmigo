@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">AutoAmigo</string>
+
+    <!--User Activity-->
+    <string name="defaultName">Usuario desconocido</string>
+    <string name="defaultCity">Ciudad desconocida</string>
+    <string name="totalTravels">Total de viajes:</string>
+    <string name="defaultTotalTravelsNumber">0</string>
+
+    <string name="skills">Habilidad</string>
+    <string name="vehicle">Vehículo</string>
+
+    <string name="driving">Conducción</string>
+    <string name="social">Social</string>
+    <string name="safety">Seguridad</string>
+    <string name="comfort">Comodidad</string>
+
+    <string name="defaultDate">XX/XX/XXXX a las XX:XX pm</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
 </resources>
