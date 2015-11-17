@@ -14,17 +14,20 @@ public class User implements Serializable {
     private float socialRating;
     private float safetyRating;
     private float comfortRating;
+    private float averageRating;
     private String interests;
 
-    ArrayList<Post> posts;
+    private ArrayList<Post> posts;
+    private ArrayList<Ride> rides;
 
     public User(String name, String city) {
         this.name = name;
         this.city = city;
         this.posts = new ArrayList<Post>();
+        this.rides = new ArrayList<Ride>();
     }
 
-    public User(String name, String city, int travelCount, float drivingRating, float socialRating, float safetyRating, float comfortRating, String interests, ArrayList<Post> posts) {
+    public User(String name, String city, int travelCount, float drivingRating, float socialRating, float safetyRating, float comfortRating, String interests, ArrayList<Post> posts, ArrayList<Ride> rides) {
         this.name = name;
         this.city = city;
         this.travelCount = travelCount;
@@ -32,8 +35,10 @@ public class User implements Serializable {
         this.socialRating = socialRating;
         this.safetyRating = safetyRating;
         this.comfortRating = comfortRating;
+        this.averageRating = (drivingRating + socialRating + safetyRating + comfortRating)/4.0f;
         this.interests = interests;
         this.posts = posts;
+        this.rides = rides;
     }
 
     public String getName() {
@@ -92,6 +97,14 @@ public class User implements Serializable {
         this.comfortRating = comfortRating;
     }
 
+    public float getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(float averageRating) {
+        this.averageRating = averageRating;
+    }
+
     public String getInterests() {
         return interests;
     }
@@ -106,5 +119,25 @@ public class User implements Serializable {
 
     public void setPosts(ArrayList<Post> posts) {
         this.posts = posts;
+    }
+
+    public ArrayList<Ride> getRides() {
+        return rides;
+    }
+
+    public void setRides(ArrayList<Ride> rides) {
+        this.rides = rides;
+    }
+
+    public void addPost(Post post) {
+        posts.add(0, post);
+    }
+
+    public void addRide(Ride ride) {
+        rides.add(0, ride);
+    }
+
+    public String toString() {
+        return "User: " + name;
     }
 }

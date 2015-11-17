@@ -3,16 +3,25 @@ package schnauzer.digital.autoamigo;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RatingBar;
-import android.widget.SeekBar;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class UserActivity extends AppCompatActivity {
+public class UserActivity extends AppCompatActivity implements View.OnClickListener {
+
+    static final int USER_REVIEWS_REQUEST = 1;
+    static final int USER_POSTS_REQUEST = 2;
+    static final int USER_RIDES_REQUEST = 3;
+
+    User user=null;
+
     TextView userNameView;
     TextView cityView;
     TextView travelCountView;
@@ -21,10 +30,13 @@ public class UserActivity extends AppCompatActivity {
     TextView postDateView;
     TextView postContentView;
 
-    RatingBar drivingRating;
-    RatingBar socialRating;
-    RatingBar safetyRating;
-    RatingBar comfortRating;
+    Button reviewsButton;
+    Button postsButton;
+
+    RatingBar averageRating;
+
+    private ListView rideListView;
+    private ArrayList<Ride> userRides;
 
     Intent intent;
 
@@ -35,43 +47,121 @@ public class UserActivity extends AppCompatActivity {
 
         intent = getIntent();
 
+        user = (User) intent.getSerializableExtra("user");
+
         // Views
         userNameView = (TextView) findViewById(R.id.nameText);
         cityView = (TextView) findViewById(R.id.cityText);
         travelCountView = (TextView) findViewById(R.id.travelsNumber);
 
+        reviewsButton = (Button) findViewById(R.id.reviewsButton);
+        postsButton = (Button) findViewById(R.id.postsButton);
+
         postUserNameView = (TextView) findViewById(R.id.userNameText);
         postDateView = (TextView) findViewById(R.id.dateText);
         postContentView = (TextView) findViewById(R.id.postText);
 
-        drivingRating = (RatingBar) findViewById(R.id.drivingRatingBar);
-        socialRating = (RatingBar) findViewById(R.id.socialRatingBar);
-        safetyRating = (RatingBar) findViewById(R.id.safetyRatingBar);
-        comfortRating = (RatingBar) findViewById(R.id.comfortRatingBar);
+        averageRating = (RatingBar) findViewById(R.id.averageRatingBar);
 
-        //testing
-        User user = new User("Diego Padilla", "Ensenada", 51, 3.8f, 4.76f, 4.5f, 4.0f, "Gatos", new ArrayList<Post>());
+        rideListView = (ListView) findViewById(R.id.rideListView);
+
+        // Listeners
+        reviewsButton.setOnClickListener(this);
+        postsButton.setOnClickListener(this);
+
+        // Testing
+        user = new User("Diego Padilla", "Ensenada", 51, 3.8f, 3.76f, 4.2f, 4.0f, "Gatos", new ArrayList<Post>(), new ArrayList<Ride>());
+
+        user.addPost(new Post("Diego Padilla", 2015, 10, 5, 13, 35, "Hoy no voy a poder dar raite"));
+        user.addPost(new Post("Rogelio Gonzalez", 2015, 10, 5, 13, 45, "Vales roña, Diego."));
+        user.addPost(new Post("Diego Padilla", 2015, 10, 14, 13, 12, "Adivinen que\nno raite today"));
+        user.addPost(new Post("Diego Padilla", 2015, 10, 15, 15, 37, "Ya pues hoy si puedo"));
+        user.addPost(new Post("Diego Padilla", 2015, 10, 18, 9, 40, "lluvia lluvia"));
+        user.addPost(new Post("Diego Padilla", 2015, 11, 3, 3, 35, "ya me quiero eslipear"));
+        user.addPost(new Post("Diego Padilla", 2015, 11, 11, 14, 10, "Lo siento chicos pero hoy no podre proporcionales el glorioso raite que se que se merecen"));
+        user.addPost(new Post("Diego Padilla", 2015, 11, 17, 14, 24, "give me the rait to be raited"));
+
+        user.addRide(new Ride("Regreso a casa", new boolean[]{false, true, false, true, false, false, false}, 6, 0, 6, 30, true, true));
+        user.addRide(new Ride("Al CETYS", new boolean[] {false, false, false, false, false, true, false}, 3, 20, 3, 55, true, true));
+        user.addRide(new Ride("Regreso a casa", new boolean[] {false, false, true, false, true, false, false}, 9, 0, 9, 30, true, true));
+        user.addRide(new Ride("Regreso a casa", new boolean[] {false, true, false, true, false, false, false}, 7, 0, 7, 30, true, true));
+        user.addRide(new Ride("Al CETYS", new boolean[]{false, true, true, true, true, false, false}, 4, 20, 4, 55, true, true));
+
+        userRides = user.getRides();
+
         setUser(user);
+
+        // Ride List
+        RideAdapter rideAdapter = new RideAdapter(this, R.layout.item_ride, user.getRides());
+
+        rideListView.setAdapter(rideAdapter);
+
+        rideListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = userRides.get(position).getName();
+
+                Toast.makeText(getBaseContext(), item, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    protected void setUser (User user) {
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.reviewsButton:
+                Toast.makeText(UserActivity.this, "Trying to launch user reviews", Toast.LENGTH_SHORT).show();
+                intent = new Intent(this, UserReviewsActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+                break;
+            case R.id.postsButton:
+                Toast.makeText(UserActivity.this, "Trying to launch user posts", Toast.LENGTH_SHORT).show();
+                intent = new Intent(this, UserPostsActivity.class);
+                intent.putExtra("user", user);
+                startActivityForResult(intent, USER_POSTS_REQUEST);
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == USER_REVIEWS_REQUEST || requestCode == USER_POSTS_REQUEST ||requestCode == USER_RIDES_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Post post = (Post) data.getSerializableExtra("lastPost");
+                user.addPost(post);
+                Log.wtf("User Activity", "Result is: "+post.toString());
+                setMainPost(post);
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(UserActivity.this, "No user returned", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void setUser (User user) {
         userNameView.setText(user.getName());
         cityView.setText(user.getCity());
         travelCountView.setText(user.getTravelCount() + "");
 
         if (!user.getPosts().isEmpty()) {
-            postUserNameView.setText(user.getPosts().get(0).getUser());
-            postDateView.setText(user.getPosts().get(0).getDate().toString());
-            postContentView.setText(user.getPosts().get(0).getContent());
+            setMainPost(user.getPosts().get(0));
         } else {
+            setMainPost(null);
+        }
+
+        averageRating.setRating(user.getAverageRating());
+    }
+
+    private void setMainPost(Post post) { // Set main post as the recieved post, if post is null, set "No posts" as the main post
+        if (post == null) {
             postUserNameView.setText("");
             postDateView.setText("No posts");
             postContentView.setText("");
+        } else {
+            postUserNameView.setText(post.getUser());
+            postDateView.setText(post.getDate());
+            postContentView.setText(post.getContent());
         }
-
-        drivingRating.setRating(user.getDrivingRating());
-        socialRating.setRating(user.getSocialRating());
-        safetyRating.setRating(user.getSafetyRating());
-        comfortRating.setRating(user.getComfortRating());
     }
 }
