@@ -4,20 +4,46 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#c5dfdddd"
-    android:padding="10dp">
+    android:background="#c5dfdddd">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <LinearLayout
             android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:id="@+id/userImageView"
-            android:src="@drawable/user"
-            android:layout_gravity="center" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/userImageView"
+                android:src="@drawable/user"
+                android:layout_gravity="center" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="5dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/facebookIcon"
+                    android:src="@drawable/facebook" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/disabilityIcon"
+                    android:src="@drawable/descapacitado" />
+            </LinearLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
@@ -65,47 +91,62 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp">
-
-        <ImageView
+        android:layout_marginTop="5dp"
+        android:gravity="center">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:layout_gravity="center_vertical"
+            android:text="@string/average"/>
+        <RatingBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/facebookIcon"
-            android:src="@drawable/facebook" />
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="34dp"
-            android:id="@+id/disabilityIcon"
-            android:src="@drawable/descapacitado" />
+            android:id="@+id/averageRatingBar"
+            android:stepSize="0.1"
+            android:numStars="5" />
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:text=">"
+            android:id="@+id/reviewsButton" />
     </LinearLayout>
 
-    <ScrollView
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:id="@+id/scrollView"
-        android:layout_gravity="center_horizontal">
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <include
+            android:layout_width="320dp"
+            android:layout_height="85dp"
+            layout="@layout/user_post"
+            android:layout_gravity="center_horizontal"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:text=">"
+            android:id="@+id/postsButton"/>
+    </LinearLayout>
 
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                layout="@layout/user_post"
-                android:layout_gravity="center_horizontal" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/rides"
+        android:textColor="@color/grey"
+        android:ems="10"/>
 
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                layout="@layout/user_ratings" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/rideListView"/>
+    </LinearLayout>
 
-        </LinearLayout>
-    </ScrollView>
 </LinearLayout>
