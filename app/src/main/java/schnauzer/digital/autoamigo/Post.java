@@ -23,6 +23,7 @@ public class Post implements Serializable{
         this.content = content;
     }
 
+
     public String getUser() {
         return user;
     }

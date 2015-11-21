@@ -40,13 +40,13 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
 
     Intent intent;
 
+    DBAdapter myDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-
         intent = getIntent();
-
         user = (User) intent.getSerializableExtra("user");
 
         // Views
@@ -104,6 +104,39 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(getBaseContext(), item, Toast.LENGTH_SHORT).show();
             }
         });
+
+        //DataBase
+        openDB();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        closeDB();
+    }
+
+
+
+    private void openDB() {
+        myDB = new DBAdapter(this);
+        myDB.open();
+    }
+    private void closeDB() {
+        myDB.close();
+    }
+    public void onSaveUSer(){
+       long newId =  myDB.addUser("KEY_NAME", "KEY_LASTNAME", "KEY_EMAIL","KEY_CITY","KEY_USER","KEY_PASSWORD","KEY_TYPE","KEY_HANDICAPPED","20","KEY_INSTITUTION");
+    }
+    public void onSavePost(){
+        long newId =  myDB.addPost(1, "KEY_DATE", "KEY_TIME", "KEY_POST");
+
+    }
+    public void onSaveRide(){
+        long newId =  myDB.addRide(1, "KEY_DATE_RIDE", "KEY_START_TIME","KEY_END_TIME","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY","NAME_RIDE");
+
+    }
+    public void onDisplayDB(){
+
     }
 
     @Override
