@@ -22,6 +22,9 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
 
     User user=null;
 
+    //NAVIGATION VIEWS
+    Button myProfileButton;
+
     TextView userNameView;
     TextView cityView;
     TextView travelCountView;
@@ -50,6 +53,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         user = (User) intent.getSerializableExtra("user");
 
         // Views
+        myProfileButton = (Button) findViewById(R.id.myProfileButton);
         userNameView = (TextView) findViewById(R.id.nameText);
         cityView = (TextView) findViewById(R.id.cityText);
         travelCountView = (TextView) findViewById(R.id.travelsNumber);
@@ -66,6 +70,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         rideListView = (ListView) findViewById(R.id.rideListView);
 
         // Listeners
+        myProfileButton.setOnClickListener(this);
         reviewsButton.setOnClickListener(this);
         postsButton.setOnClickListener(this);
 
@@ -106,25 +111,25 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         //DataBase
-        openDB();
+        //openDB();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        closeDB();
+        //closeDB();
     }
-
-
 
     private void openDB() {
         myDB = new DBAdapter(this);
         myDB.open();
     }
+
     private void closeDB() {
         myDB.close();
     }
-    public void onSaveUSer(){
+
+    public void onSaveUser(){
        long newId =  myDB.addUser("KEY_NAME", "KEY_LASTNAME", "KEY_EMAIL","KEY_CITY","KEY_USER","KEY_PASSWORD","KEY_TYPE","KEY_HANDICAPPED","20","KEY_INSTITUTION");
     }
     public void onSavePost(){
@@ -135,22 +140,27 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         long newId =  myDB.addRide(1, "KEY_DATE_RIDE", "KEY_START_TIME","KEY_END_TIME","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY","NAME_RIDE");
 
     }
-    public void onDisplayDB(){
 
+    public void onDisplayDB(){
+        // METODO VACIO?
     }
 
     @Override
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
+            case R.id.myProfileButton:
+                /*intent = new Intent(this, UserActivity.class);
+                startActivity(intent);*/
+                break;
             case R.id.reviewsButton:
-                Toast.makeText(UserActivity.this, "Trying to launch user reviews", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(UserActivity.this, "Trying to launch user reviews", Toast.LENGTH_SHORT).show();
                 intent = new Intent(this, UserReviewsActivity.class);
                 intent.putExtra("user", user);
                 startActivity(intent);
                 break;
             case R.id.postsButton:
-                Toast.makeText(UserActivity.this, "Trying to launch user posts", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(UserActivity.this, "Trying to launch user posts", Toast.LENGTH_SHORT).show();
                 intent = new Intent(this, UserPostsActivity.class);
                 intent.putExtra("user", user);
                 startActivityForResult(intent, USER_POSTS_REQUEST);
