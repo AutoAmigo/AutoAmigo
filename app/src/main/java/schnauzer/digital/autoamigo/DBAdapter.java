@@ -1,5 +1,5 @@
 // ------------------------------------ DBADapter.java ---------------------------------------------
-
+/*
 
 package schnauzer.digital.autoamigo;
 
@@ -24,7 +24,7 @@ public class DBAdapter {
 	public static final int COL_ROWID = 0;
 	/*
 	 * CHANGE 1:
-	 */
+
 	// TODO: Setup your fields here:
 	public static final String KEY_NAME = "name";
 	public static final String KEY_LASTNAME = "lastname";
@@ -256,7 +256,7 @@ public class DBAdapter {
 
 		/*
 		 * CHANGE 4:
-		 */
+
 		// TODO: Update data in the row with new fields.
 		// TODO: Also change the function's arguments to be what you need!
 		// Create row's data:
@@ -278,7 +278,7 @@ public class DBAdapter {
 	/**
 	 * Private class which handles database creation and upgrading.
 	 * Used to handle low-level database access.
-	 */
+
 	private static class DatabaseHelper extends SQLiteOpenHelper
 	{
 		DatabaseHelper(Context context) {
@@ -303,3 +303,4 @@ public class DBAdapter {
 		}
 	}
 }
+*/

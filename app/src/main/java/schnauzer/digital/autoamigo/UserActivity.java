@@ -40,7 +40,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
 
     Intent intent;
 
-    DBAdapter myDB;
+    //DBAdapter myDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,10 +105,13 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        //DataBase
+     /*   //DataBase
         openDB();
+*/
+        //Map
+        Button buttonmap = (Button)findViewById(R.id.buttonMap);
     }
-
+/*
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -132,11 +135,15 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     public void onSaveRide(){
-        long newId =  myDB.addRide(1, "KEY_DATE_RIDE", "KEY_START_TIME","KEY_END_TIME","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY","NAME_RIDE");
+        long newId =  myDB.addRide(1, "KEY_DATE_RIDE", "KEY_START_TIME", "KEY_END_TIME", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY", "NAME_RIDE");
 
     }
     public void onDisplayDB(){
 
+    }*/
+    public void openMap(View view){
+        Intent intent = new Intent(this,MapsActivity.class);
+        startActivity(intent);
     }
 
     @Override
