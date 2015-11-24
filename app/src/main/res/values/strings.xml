@@ -3,7 +3,7 @@
 
     <!--Navigation-->
     <string name="myProfile">Mi Perfil</string>
-    
+
     <!--User Activity-->
     <string name="defaultName">Usuario desconocido</string>
     <string name="defaultCity">Ciudad desconocida</string>
@@ -34,4 +34,15 @@
 
     <string name="settings">Configuración</string>
     <string name="about">Acerca de</string>
+
+    <string-array name="estado_array">
+        <item>Conductor</item>
+        <item>Pasajero</item>
+    </string-array>
+
+    <string name="reglaNoComer">No comer</string>
+    <string name="reglaNoDormir">No Dormir</string>
+    <string name="reglaNoMusica">No Musica</string>
+    <string name="reglaNoHablar">No hablar</string>
+
 </resources>
