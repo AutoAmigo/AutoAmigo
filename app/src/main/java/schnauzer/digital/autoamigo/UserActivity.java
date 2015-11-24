@@ -43,7 +43,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
 
     Intent intent;
 
-    DBAdapter myDB;
+    //DBAdapter myDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,10 +110,18 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+<<<<<<< HEAD
+     /*   //DataBase
+        openDB();
+*/
+        //Map
+        Button buttonmap = (Button)findViewById(R.id.buttonMap);
+=======
         //DataBase
         //openDB();
+>>>>>>> f32ab46d8cda1d49f5ef410974793fa9032ed8d5
     }
-
+/*
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -137,12 +145,19 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     public void onSaveRide(){
-        long newId =  myDB.addRide(1, "KEY_DATE_RIDE", "KEY_START_TIME","KEY_END_TIME","MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY","SATURDAY","SUNDAY","NAME_RIDE");
+        long newId =  myDB.addRide(1, "KEY_DATE_RIDE", "KEY_START_TIME", "KEY_END_TIME", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY", "NAME_RIDE");
 
     }
 
+<<<<<<< HEAD
+    }*/
+    public void openMap(View view){
+        Intent intent = new Intent(this,MapsActivity.class);
+        startActivity(intent);
+=======
     public void onDisplayDB(){
         // METODO VACIO?
+>>>>>>> f32ab46d8cda1d49f5ef410974793fa9032ed8d5
     }
 
     @Override
