@@ -29,6 +29,9 @@ public class UserPostsActivity extends AppCompatActivity implements View.OnClick
     User user;
     String sessionUser;
 
+    //NAVIGATION VIEWS
+    Button myProfileButton;
+
     private EditText postEditText;
     //private Button postButton;
     private ListView postListView;
@@ -45,11 +48,13 @@ public class UserPostsActivity extends AppCompatActivity implements View.OnClick
         sessionUser = user.getName();                       // ESTO SE DEBE CAMBIAR POR EL NOMBRE DE USUARIO DE LA CUENTA QUE TENGA LA SESION INICIADA
 
         // Views
+        myProfileButton = (Button) findViewById(R.id.myProfileButton);
         postEditText = (EditText) findViewById(R.id.postEditText);
         //postButton = (Button) findViewById(R.id.postButton);
         postListView = (ListView) findViewById(R.id.postsListView);
 
         // Listeners
+        myProfileButton.setOnClickListener(this);
         postEditText.setOnFocusChangeListener(this);
         //postButton.setOnClickListener(this);
 
@@ -69,6 +74,10 @@ public class UserPostsActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
+            case R.id.myProfileButton:
+                intent = new Intent(this, UserActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 

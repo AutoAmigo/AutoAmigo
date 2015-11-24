@@ -2,6 +2,7 @@
 <items version="2" >
 
     <item
+<<<<<<< HEAD
         jar="C:\Users\Ricardo\Documents\GitHub\AutoAmigo\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\8.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
@@ -168,6 +169,34 @@
         revision="23.0.1"
         sha1="3178362320bcf51228835b60ff978efadfd1f783">
         <dex dex="C:\Users\Ricardo\Documents\GitHub\AutoAmigo\app\build\intermediates\pre-dexed\debug\classes-1bf83af118552772bc15a28518bd9a360e440118.jar" />
+=======
+        jar="C:\Users\Rogelio\Documents\GitHub\AndroidStudioProjects\AutoAmigo\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="C:\Users\Rogelio\Documents\GitHub\AndroidStudioProjects\AutoAmigo\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.1-e99266992618644f9f19165d92003c4beb718eaf.jar" />
+    </item>
+    <item
+        jar="C:\Users\Rogelio\Documents\GitHub\AndroidStudioProjects\AutoAmigo\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="C:\Users\Rogelio\Documents\GitHub\AndroidStudioProjects\AutoAmigo\app\build\intermediates\pre-dexed\debug\classes-42373a7c004c4ee3d53f779974368e371e4ce663.jar" />
+    </item>
+    <item
+        jar="C:\Users\Rogelio\Documents\GitHub\AndroidStudioProjects\AutoAmigo\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="C:\Users\Rogelio\Documents\GitHub\AndroidStudioProjects\AutoAmigo\app\build\intermediates\pre-dexed\debug\classes-a288da6d6c0f7aa0565a466fbc88c3b7ad8fc391.jar" />
+    </item>
+    <item
+        jar="C:\Users\Rogelio\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="C:\Users\Rogelio\Documents\GitHub\AndroidStudioProjects\AutoAmigo\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.1-2f61eb776b89c294d35a3223768829d694d9e424.jar" />
+>>>>>>> f32ab46d8cda1d49f5ef410974793fa9032ed8d5
     </item>
 
 </items>

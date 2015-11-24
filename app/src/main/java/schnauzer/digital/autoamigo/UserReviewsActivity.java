@@ -5,12 +5,17 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.RatingBar;
 
-public class UserReviewsActivity extends AppCompatActivity {
+public class UserReviewsActivity extends AppCompatActivity implements View.OnClickListener {
 
     Intent intent;
     User user;
+
+    //NAVIGATION VIEWS
+    Button myProfileButton;
 
     RatingBar drivingRating;
     RatingBar socialRating;
@@ -28,10 +33,13 @@ public class UserReviewsActivity extends AppCompatActivity {
 
         setTitle(user.getName());
 
+        myProfileButton = (Button) findViewById(R.id.myProfileButton);
         drivingRating = (RatingBar) findViewById(R.id.drivingRatingBar);
         socialRating = (RatingBar) findViewById(R.id.socialRatingBar);
         safetyRating = (RatingBar) findViewById(R.id.safetyRatingBar);
         comfortRating = (RatingBar) findViewById(R.id.comfortRatingBar);
+
+        myProfileButton.setOnClickListener(this);
 
         setUser(user);
     }
@@ -45,6 +53,17 @@ public class UserReviewsActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.myProfileButton:
+                intent = new Intent(this, UserActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
     private void setUser (User user) {
