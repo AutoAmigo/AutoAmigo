@@ -92,23 +92,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         user.addRide(new Ride("Regreso a casa", new boolean[] {false, true, false, true, false, false, false}, 7, 0, 7, 30, true, true));
         user.addRide(new Ride("Al CETYS", new boolean[]{false, true, true, true, true, false, false}, 4, 20, 4, 55, true, true));
 
-        userRides = user.getRides();
-
         setUser(user);
-
-        // Ride List
-        RideAdapter rideAdapter = new RideAdapter(this, R.layout.item_ride, user.getRides());
-
-        rideListView.setAdapter(rideAdapter);
-
-        rideListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item = userRides.get(position).getName();
-
-                Toast.makeText(getBaseContext(), item, Toast.LENGTH_SHORT).show();
-            }
-        });
 
      /*   //DataBase
         openDB();
@@ -205,6 +189,24 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         averageRating.setRating(user.getAverageRating());
+
+        userRides = user.getRides();
+
+        // Ride List
+        if (!userRides.isEmpty()) {
+            RideAdapter rideAdapter = new RideAdapter(this, R.layout.item_ride, userRides);
+
+            rideListView.setAdapter(rideAdapter);
+
+            rideListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String item = userRides.get(position).getName();
+
+                    Toast.makeText(getBaseContext(), item, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     private void setMainPost(Post post) { // Set main post as the recieved post, if post is null, set "No posts" as the main post

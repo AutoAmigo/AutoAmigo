@@ -49,10 +49,11 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Diego Padilla"
+                                android:text="@string/defaultName"
                                 android:textSize="25dp"
                                 android:layout_marginTop="25dp"
-                                android:layout_marginLeft="25dp"/>
+                                android:layout_marginLeft="25dp"
+                                android:id="@+id/userNameTextInterface"/>
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" android:orientation="horizontal">

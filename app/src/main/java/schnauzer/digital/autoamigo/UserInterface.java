@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,8 +21,15 @@ import java.util.ArrayList;
  */
 public class UserInterface extends AppCompatActivity implements View.OnClickListener {
 
+    User user=null;
+
     //NAVIGATION VIEWS
     Button myProfileButton;
+
+    TextView userNameText;
+
+    private ListView rideListView;
+    private ArrayList<Ride> userRides;
 
     Button reglas;
     final String logTag ="UserInterface";
@@ -30,6 +40,7 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.user_interface);
 
         myProfileButton = (Button) findViewById(R.id.myProfileButton);
+        userNameText = (TextView) findViewById(R.id.userNameTextInterface);
         TabHost tabHost = (TabHost)findViewById(R.id.tabHost);
         tabHost.setup();
 
@@ -44,8 +55,8 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
         tabHost.addTab(tabSpec);
 
 
-
         reglas = (Button) findViewById(R.id.reglasBtn);
+        rideListView = (ListView) findViewById(R.id.rideListView2);
 
         // Listeners
         myProfileButton.setOnClickListener(this);
@@ -56,9 +67,8 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
             }
         });
 
+        setUser(user);
     }
-
-
 
     public void onCheckboxClicked (View view){
         boolean checked = ((CheckBox) view).isChecked();
@@ -94,8 +104,6 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
 
     }
 
-
-
     public void reglasDialog (){
         final Dialog dialogReglas = new Dialog(this);
         dialogReglas.setContentView(R.layout.dialog_reglas);
@@ -116,6 +124,27 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
         dialogReglas.setTitle("Reglas");
 
         dialogReglas.show();
+    }
+
+    private void setUser (User user) {
+        userNameText.setText(user.getName());
+
+        userRides = user.getRides();
+
+        if (!user.getRides().isEmpty()) {
+            RideAdapter rideAdapter = new RideAdapter(this, R.layout.item_ride, userRides);
+
+            rideListView.setAdapter(rideAdapter);
+
+            rideListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String item = userRides.get(position).getName();
+
+                    Toast.makeText(getBaseContext(), item, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     @Override
