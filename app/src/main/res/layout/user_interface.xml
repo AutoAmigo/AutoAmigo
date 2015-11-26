@@ -1,151 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TabHost
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/tabHost">
-
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
+    android:background="#c5dfdddd"
+    tools:context=".UserInterface">
         <LinearLayout
-            android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TabHost
+            android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:id="@+id/tabHost">
 
-            <TabWidget
-                android:id="@android:id/tabs"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></TabWidget>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:id="@+id/perfil"
+                <TabWidget
+                    android:id="@android:id/tabs"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:orientation="horizontal">
-                        <ImageView
-                            android:layout_width="125dp"
-                            android:layout_height="125dp" android:layout_marginLeft="15dp" android:layout_marginTop="15dp"
-                            android:src="@drawable/user" />
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Diego Padilla"
-                            android:textSize="25dp"
-                            android:layout_marginTop="25dp"
-                            android:layout_marginLeft="25dp"/>
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" android:orientation="horizontal">
-                            <ImageButton
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                android:src="@drawable/healthy"
-                                android:adjustViewBounds="true"
-                                android:scaleType="fitCenter"
-                                android:layout_marginLeft="25dp"
-                                android:layout_marginTop="25dp"/>
-                            <ImageButton
-                                android:layout_width="60dp"
-                                android:layout_height="60dp"
-                                android:src="@drawable/descapacitado"
-                                android:adjustViewBounds="true"
-                                android:scaleType="fitCenter"
-                                android:layout_marginTop="25dp"/>
+                    android:layout_height="wrap_content"></TabWidget>
 
-                        </LinearLayout>
-                        </LinearLayout>
-                    </LinearLayout>
-                    <!-- Termina Area Imagen -->
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
                     <LinearLayout
+                        android:id="@+id/perfil"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:orientation="vertical"
-                        >
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:src="@drawable/divider_1"
-                            android:adjustViewBounds="true"
-                            android:scaleType="fitCenter"/>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="125dp"
+                                android:layout_height="125dp" android:layout_marginLeft="15dp" android:layout_marginTop="15dp"
+                                android:src="@drawable/user" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:orientation="vertical">
                             <TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" android:text="Estado: "
-                                android:layout_marginLeft="15dp"
-                                android:textSize="20dp"
-                                />
-                            <Spinner
-                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:entries="@array/estado_array"
-                                android:layout_marginLeft="15dp">
+                                android:text="Diego Padilla"
+                                android:textSize="25dp"
+                                android:layout_marginTop="25dp"
+                                android:layout_marginLeft="25dp"/>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" android:orientation="horizontal">
+                                <ImageButton
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:src="@drawable/healthy"
+                                    android:adjustViewBounds="true"
+                                    android:scaleType="fitCenter"
+                                    android:layout_marginLeft="25dp"
+                                    android:layout_marginTop="25dp"/>
+                                <ImageButton
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:src="@drawable/descapacitado"
+                                    android:adjustViewBounds="true"
+                                    android:scaleType="fitCenter"
+                                    android:layout_marginTop="25dp"/>
 
-                            </Spinner>
-                            <Switch
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="15dp"/>
+                            </LinearLayout>
+                            </LinearLayout>
                         </LinearLayout>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Bio"
-                            android:textSize="25dp"
-                            android:layout_marginLeft="15dp"/>
-                        <EditText
+                        <!-- Termina Area Imagen -->
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="150dp"
-                            android:background="#C5CAE9"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginRight="15dp"/>
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:text="Reglas"
-                            android:id="@+id/reglasBtn"
-                            android:background="#C5CAE9"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginRight="15dp"
-                            android:layout_marginTop="15dp"
-                            />
+                            android:layout_height="wrap_content" android:orientation="vertical"
+                            >
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:src="@drawable/divider_1"
+                                android:adjustViewBounds="true"
+                                android:scaleType="fitCenter"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" android:text="Estado: "
+                                    android:layout_marginLeft="15dp"
+                                    android:textSize="20dp"
+                                    />
+                                <Spinner
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:entries="@array/estado_array"
+                                    android:layout_marginLeft="15dp">
+
+                                </Spinner>
+                                <Switch
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="15dp"/>
+                            </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Bio"
+                                android:textSize="25dp"
+                                android:layout_marginLeft="15dp"/>
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:background="#C5CAE9"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"/>
+                            <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:text="Reglas"
+                                android:id="@+id/reglasBtn"
+                                android:background="#C5CAE9"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_marginTop="15dp"
+                                />
 
 
 
+
+
+                        </LinearLayout>
 
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/viajes"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                </LinearLayout>
+                        <ListView
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:id="@+id/rideListView2"
+                            />
 
-                <LinearLayout
-                    android:id="@+id/viajes"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    </LinearLayout>
 
-                    <ListView
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:id="@+id/rideListView2"
-                        />
+                </FrameLayout>
 
-                </LinearLayout>
+            </LinearLayout>
+        </TabHost>
+    </LinearLayout>
 
-            </FrameLayout>
+    <include
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        layout="@layout/navigation_drawer"
+        android:layout_gravity="left|start" />
 
-        </LinearLayout>
-    </TabHost>
-</LinearLayout>
+</android.support.v4.widget.DrawerLayout>

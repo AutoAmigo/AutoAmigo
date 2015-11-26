@@ -16,16 +16,20 @@ import java.util.ArrayList;
 /**
  * Created by Erik on 11/23/2015.
  */
-public class UserInterface extends AppCompatActivity {
+public class UserInterface extends AppCompatActivity implements View.OnClickListener {
+
+    //NAVIGATION VIEWS
+    Button myProfileButton;
+
     Button reglas;
     final String logTag ="UserInterface";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_interface);
 
+        myProfileButton = (Button) findViewById(R.id.myProfileButton);
         TabHost tabHost = (TabHost)findViewById(R.id.tabHost);
         tabHost.setup();
 
@@ -42,6 +46,9 @@ public class UserInterface extends AppCompatActivity {
 
 
         reglas = (Button) findViewById(R.id.reglasBtn);
+
+        // Listeners
+        myProfileButton.setOnClickListener(this);
         reglas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +118,15 @@ public class UserInterface extends AppCompatActivity {
         dialogReglas.show();
     }
 
-
-
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.myProfileButton:
+                intent = new Intent(this, UserActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
 
 }

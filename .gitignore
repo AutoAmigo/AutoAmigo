@@ -55,3 +55,4 @@ local.properties
 .gradle/2.4/taskArtifacts/fileSnapshots.bin
 .gradle/2.4/taskArtifacts/outputFileStates.bin
 .gradle/2.4/taskArtifacts/taskArtifacts.bin
+.gradle/2.4/taskArtifacts/cache.properties.lock

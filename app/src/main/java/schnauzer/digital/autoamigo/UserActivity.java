@@ -110,16 +110,13 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-<<<<<<< HEAD
      /*   //DataBase
         openDB();
 */
         //Map
         Button buttonmap = (Button)findViewById(R.id.buttonMap);
-=======
         //DataBase
         //openDB();
->>>>>>> f32ab46d8cda1d49f5ef410974793fa9032ed8d5
     }
 /*
     @Override
@@ -149,15 +146,14 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-<<<<<<< HEAD
     }*/
     public void openMap(View view){
         Intent intent = new Intent(this,MapsActivity.class);
         startActivity(intent);
-=======
+    }
+
     public void onDisplayDB(){
         // METODO VACIO?
->>>>>>> f32ab46d8cda1d49f5ef410974793fa9032ed8d5
     }
 
     @Override
