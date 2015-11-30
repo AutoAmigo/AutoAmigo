@@ -67,6 +67,24 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
             }
         });
 
+        // Testing
+        user = new User("Diego Padilla", "Ensenada", 51, 3.8f, 3.76f, 4.2f, 4.0f, "Gatos", new ArrayList<Post>(), new ArrayList<Ride>());
+
+        user.addPost(new Post("Diego Padilla", 2015, 10, 5, 13, 35, "Hoy no voy a poder dar raite"));
+        user.addPost(new Post("Rogelio Gonzalez", 2015, 10, 5, 13, 45, "Vales roña, Diego."));
+        user.addPost(new Post("Diego Padilla", 2015, 10, 14, 13, 12, "Adivinen que\nno raite today"));
+        user.addPost(new Post("Diego Padilla", 2015, 10, 15, 15, 37, "Ya pues hoy si puedo"));
+        user.addPost(new Post("Diego Padilla", 2015, 10, 18, 9, 40, "lluvia lluvia"));
+        user.addPost(new Post("Diego Padilla", 2015, 11, 3, 3, 35, "ya me quiero eslipear"));
+        user.addPost(new Post("Diego Padilla", 2015, 11, 11, 14, 10, "Lo siento chicos pero hoy no podre proporcionales el glorioso raite que se que se merecen"));
+        user.addPost(new Post("Diego Padilla", 2015, 11, 17, 14, 24, "give me the rait to be raited"));
+
+        user.addRide(new Ride("Regreso a casa", new boolean[]{false, true, false, true, false, false, false}, 6, 0, 6, 30, true, true));
+        user.addRide(new Ride("Al CETYS", new boolean[] {false, false, false, false, false, true, false}, 3, 20, 3, 55, true, true));
+        user.addRide(new Ride("Regreso a casa", new boolean[] {false, false, true, false, true, false, false}, 9, 0, 9, 30, true, true));
+        user.addRide(new Ride("Regreso a casa", new boolean[] {false, true, false, true, false, false, false}, 7, 0, 7, 30, true, true));
+        user.addRide(new Ride("Al CETYS", new boolean[]{false, true, true, true, true, false, false}, 4, 20, 4, 55, true, true));
+
         setUser(user);
     }
 
@@ -127,6 +145,9 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
     }
 
     private void setUser (User user) {
+        if (user==null)
+            return;
+
         userNameText.setText(user.getName());
 
         userRides = user.getRides();
@@ -139,9 +160,11 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
             rideListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent;
                     String item = userRides.get(position).getName();
-
                     Toast.makeText(getBaseContext(), item, Toast.LENGTH_SHORT).show();
+                    intent = new Intent(getBaseContext(), MapsActivity.class);
+                    startActivity(intent);
                 }
             });
         }
