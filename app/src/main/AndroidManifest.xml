@@ -31,15 +31,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".UserActivity" />
         </activity>
-        <activity
-            android:name=".UserInterface"
-             >
+        <activity android:name=".UserInterface" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".UserReviewsActivity"
@@ -64,7 +61,11 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" >
+            android:label="@string/title_activity_maps"
+            android:parentActivityName=".RideActivity">
+        </activity>
+        <activity android:name=".RideActivity"
+            android:parentActivityName=".UserInterface">
         </activity>
     </application>
 

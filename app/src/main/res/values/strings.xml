@@ -23,11 +23,13 @@
     <string name="defaultDate">XX/XX/XXXX a las XX:XX pm</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
 
-    <string name="defaultRide">Destino desconocido</string>
+
     <string name="departTime">XX:XX am</string>
     <string name="arriveTime">XX:XX pm</string>
     <string name="depart">HS: </string>
     <string name="arrive">HL: </string>
+    <string name="departTimeTitle">Hora de salida</string>
+    <string name="arriveTimeTitle">Hora de llegada</string>
 
     <string name="post">Escribe una publicación</string>
     <string name="postButton">PUBLICAR</string>
@@ -45,5 +47,31 @@
     <string name="reglaNoMusica">No Musica</string>
     <string name="reglaNoHablar">No hablar</string>
 
+    <!--RideActivity-->
+    <string name="defaultRide">Destino desconocido</string>
+    <string name="rideHint">Nombre del viaje</string>
+
+    <string name="editMap">Editar mapa</string>
+
+    <string name="days">Días</string>
+    <string name="sunday">Domingo</string>
+    <string name="monday">Lunes</string>
+    <string name="tuesday">Martes</string>
+    <string name="wednesday">Miercoles</string>
+    <string name="thursday">Jueves</string>
+    <string name="friday">Viernes</string>
+    <string name="saturday">Sabado</string>
+
+    <string name="cancelButton">Cancelar</string>
+    <string name="acceptButton">Aceptar</string>
+    <string name="saveButton">Guardar</string>
+    <string name="deleteButton">Eliminar</string>
+
+    <!--Maps Activity-->
     <string name="title_activity_maps">Map</string>
+    <string name="undo">Deshacer</string>
+    <string name="clear">Reiniciar</string>
+    <string name="done">LISTO</string>
+    <string name="start">Salida</string>
+    <string name="destiny">Destino</string>
 </resources>

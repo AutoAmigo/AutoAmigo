@@ -1,6 +1,9 @@
 package schnauzer.digital.autoamigo;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by Rogelio on 11/16/2015.
@@ -8,13 +11,15 @@ import java.io.Serializable;
 public class Ride implements Serializable {
     String name;
     boolean[] days = new boolean[7];
-
     int departHour;
     int departMinutes;
     int arriveHour;
     int arriveMinutes;
     boolean arrivePm;
     boolean departPm;
+
+    private ArrayList<LatLng> points;
+    private ArrayList<LatLng> bounds;
 
     public Ride(String name, boolean[] days, int departHour, int departMinutes, int arriveHour, int arriveMinutes, boolean departPm, boolean arrivePm) {
         this.name = name;
@@ -25,6 +30,21 @@ public class Ride implements Serializable {
         this.arriveMinutes = arriveMinutes;
         this.departPm = departPm;
         this.arrivePm = arrivePm;
+        this.points = new ArrayList<LatLng>();
+        this.bounds = new ArrayList<LatLng>();
+    }
+
+    public Ride () {
+        this.name = "Default Ride";
+        this.days = new boolean[7];
+        this.departHour = 12;
+        this.departMinutes = 0;
+        this.arriveHour = 12;
+        this.arriveMinutes = 0;
+        this.departPm = true;
+        this.arrivePm = true;
+        this.points = new ArrayList<LatLng>();
+        this.bounds = new ArrayList<LatLng>();
     }
 
     public String getName() {
@@ -89,6 +109,22 @@ public class Ride implements Serializable {
 
     public void setDepartPm(boolean departPm) {
         this.departPm = departPm;
+    }
+
+    public ArrayList<LatLng> getPoints() {
+        return points;
+    }
+
+    public void setPoints(ArrayList<LatLng> points) {
+        this.points = points;
+    }
+
+    public ArrayList<LatLng> getBounds() {
+        return bounds;
+    }
+
+    public void setBounds(ArrayList<LatLng> bounds) {
+        this.bounds = bounds;
     }
 
     protected String getDepartTime() {

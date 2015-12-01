@@ -31,6 +31,9 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
     private ListView rideListView;
     private ArrayList<Ride> userRides;
 
+    private static final int USER_RIDE_REQUEST = 1;
+    private int ridePosition;
+
     Button reglas;
     final String logTag ="UserInterface";
 
@@ -86,6 +89,14 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
         user.addRide(new Ride("Al CETYS", new boolean[]{false, true, true, true, true, false, false}, 4, 20, 4, 55, true, true));
 
         setUser(user);
+    }
+
+    @Override
+    public void onStart () {
+        super.onStart();
+
+        Intent intent = getIntent();
+        user = (User) intent.getSerializableExtra("user");
     }
 
     public void onCheckboxClicked (View view){
@@ -160,11 +171,13 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
             rideListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ridePosition = position;
                     Intent intent;
                     String item = userRides.get(position).getName();
                     Toast.makeText(getBaseContext(), item, Toast.LENGTH_SHORT).show();
-                    intent = new Intent(getBaseContext(), MapsActivity.class);
-                    startActivity(intent);
+                    intent = new Intent(getBaseContext(), RideActivity.class);
+                    intent.putExtra("ride", userRides.get(position));
+                    startActivityForResult(intent, USER_RIDE_REQUEST);
                 }
             });
         }
@@ -181,4 +194,20 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == USER_RIDE_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                userRides.set(ridePosition, (Ride) data.getSerializableExtra("ride"));
+                Log.wtf(getLocalClassName(), "Ride position: " + ridePosition);
+                Log.wtf(getLocalClassName(), "Retrieved ride: "+data.getSerializableExtra("ride"));
+                Log.wtf(getLocalClassName(), "User rides: "+userRides);
+                Log.wtf(getLocalClassName(), "User: "+user);
+                if (user!=null)
+                    user.setRides(userRides);
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(UserInterface.this, "No ride returned", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }

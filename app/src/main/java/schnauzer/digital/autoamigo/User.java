@@ -18,7 +18,7 @@ public class User implements Serializable {
     private String interests;
 
     private ArrayList<Post> posts;
-    private ArrayList<Ride> rides;
+    protected ArrayList<Ride> rides;
 
     public User(String name, String city) {
         this.name = name;

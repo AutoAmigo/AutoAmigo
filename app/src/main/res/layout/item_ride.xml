@@ -27,13 +27,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:text="D" android:layout_marginRight="5dp" android:id="@+id/sunday"/>
             <TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:text="L" android:layout_marginRight="5dp" android:id="@+id/monday"/>
             <TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:text="M" android:layout_marginRight="5dp" android:id="@+id/tuesday"/>
             <TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:text="M" android:layout_marginRight="5dp" android:id="@+id/wednesday"/>
             <TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:text="J" android:layout_marginRight="5dp" android:id="@+id/thursday"/>
             <TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:text="V" android:layout_marginRight="5dp" android:id="@+id/friday"/>
             <TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:text="S" android:layout_marginRight="5dp" android:id="@+id/saturday"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:text="D" android:layout_marginRight="5dp" android:id="@+id/sunday"/>
         </LinearLayout>
 
         <LinearLayout

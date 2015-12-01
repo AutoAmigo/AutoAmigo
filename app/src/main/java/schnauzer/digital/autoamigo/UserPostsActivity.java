@@ -64,13 +64,6 @@ public class UserPostsActivity extends AppCompatActivity implements View.OnClick
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.posts_menu, menu);
-        return true;
-    }
-
-    @Override
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
@@ -79,6 +72,13 @@ public class UserPostsActivity extends AppCompatActivity implements View.OnClick
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.posts_menu, menu);
+        return true;
     }
 
     @Override
