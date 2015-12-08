@@ -23,7 +23,7 @@ import java.net.URLConnection;
 
 public class DBSchedule {
 
-    private String url="http://0.0.0.0:3000/api/pckmupSchedules"; //cambiarla cuando este hosteado !!
+    private String url="https://afternoon-spire-5809.herokuapp.com/api/pckmupSchedules";
 
     private String departureTime="",arrivalTime="", rideId="", scheduleId="";
                             //lun,mar,mier,juev,vier,sab,dom

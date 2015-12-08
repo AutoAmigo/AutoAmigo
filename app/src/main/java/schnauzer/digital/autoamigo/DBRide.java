@@ -24,7 +24,7 @@ import java.net.URLConnection;
 
 public class DBRide {
                                                 //Trip=Ride
-    private String url="http://0.0.0.0:3000/api/pckmupTrips"; //cambiarla cuando este hosteado !!
+    private String url="https://afternoon-spire-5809.herokuapp.com/api/pckmupTrips"; //cambiarla cuando este hosteado !!
 
     private String rideName="",rideUserid="", rideId="";
 

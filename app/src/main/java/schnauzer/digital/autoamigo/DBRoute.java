@@ -24,7 +24,7 @@ import java.net.URLConnection;
 
 public class DBRoute {
 
-    private String url="http://0.0.0.0:3000/api/pckmupRoutes"; //cambiarla cuando este hosteado !!
+    private String url="https://afternoon-spire-5809.herokuapp.com/api/pckmupRoutes";
 
     private double[] Lat=null,Lng=null;
     private String routeId="", rideId="";
