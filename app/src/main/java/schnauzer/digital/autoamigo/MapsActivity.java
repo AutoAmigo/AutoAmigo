@@ -28,6 +28,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private GoogleMap mMap;
     private Intent intent;
+    private boolean raiteFlag;
 
     private Button undoButton;
     private Button clearButton;
@@ -48,6 +49,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         intent = getIntent();
         points = (ArrayList<LatLng>) intent.getSerializableExtra("points");
+        raiteFlag = (Boolean) intent.getBooleanExtra("conductor", false);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -57,6 +59,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         clearButton = (Button) findViewById(R.id.clearButton);
         undoButton.setOnClickListener(this);
         clearButton.setOnClickListener(this);
+        if(raiteFlag==true){
+            View v = this.findViewById(android.R.id.content);
+            undoButton.setVisibility(v.INVISIBLE);
+        }
     }
 
     @Override
@@ -120,20 +126,38 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (latLng.longitude > east)
             east = latLng.longitude;
         Log.wtf(this.getLocalClassName(), "Click on: "+latLng.toString());
-        points.add(latLng);
+        if(raiteFlag==false||(raiteFlag==true&&points.size()<2)){
+            points.add(latLng);
+        }else{
+            Log.wtf("ASD","SALIEND");
+            return;
+        }
+
         int size = points.size();
         if (size<2) {
             mMap.addMarker(new MarkerOptions().position(points.get(0)).title(getResources().getString(R.string.start)));
             return;
         }
-        mMap.addPolyline((new PolylineOptions()).add(points.get(size-2), points.get(size-1)).width(5).color(Color.BLUE).geodesic(true));
+        if(raiteFlag==false) {
+            mMap.addPolyline((new PolylineOptions()).add(points.get(size - 2), points.get(size - 1)).width(5).color(Color.BLUE).geodesic(true));
+        }else{
+            if(points.size()==2){
+                mMap.addMarker(new MarkerOptions().position(points.get(1)).title(getResources().getString(R.string.destiny)));
+            }
+        }
     }
 
     public void drawPoints (ArrayList<LatLng> points) {
         if (points.size()>0)
             mMap.addMarker(new MarkerOptions().position(points.get(0)).title(getResources().getString(R.string.start)));
-        for (int i=1 ; i<points.size(); i++)
-            mMap.addPolyline((new PolylineOptions()).add(points.get(i-1), points.get(i)).width(5).color(Color.BLUE).geodesic(true));
+        if(raiteFlag==false) {
+            for (int i = 1; i < points.size(); i++)
+                mMap.addPolyline((new PolylineOptions()).add(points.get(i - 1), points.get(i)).width(5).color(Color.BLUE).geodesic(true));
+        }else{
+            if(points.size()==2){
+                mMap.addMarker(new MarkerOptions().position(points.get(1)).title(getResources().getString(R.string.destiny)));
+            }
+        }
     }
 
     @Override

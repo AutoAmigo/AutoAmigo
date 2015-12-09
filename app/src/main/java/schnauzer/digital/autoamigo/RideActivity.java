@@ -36,9 +36,11 @@ public class RideActivity extends AppCompatActivity implements DialogInterface.O
     private GoogleMap mMap;
 
     private Dialog daysDialog;
+    private Boolean raiteFlag;
 
     private Intent intent;
     private Ride ride;
+
 
     private EditText rideNameEditText;
     private Button editMapButton;
@@ -77,6 +79,7 @@ public class RideActivity extends AppCompatActivity implements DialogInterface.O
 
         intent = getIntent();
         ride = (Ride) intent.getSerializableExtra("ride");
+        raiteFlag = (Boolean) intent.getBooleanExtra("conductor",false);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -327,17 +330,25 @@ public class RideActivity extends AppCompatActivity implements DialogInterface.O
         Intent intent = new Intent(this, MapsActivity.class);
         intent.putExtra("points", ride.getPoints());
         intent.putExtra("bounds", ride.getBounds());
+        if(raiteFlag==true){
+            intent.putExtra("conductor",true);
+        }else{
+            intent.putExtra("conductor",false);
+        }
         startActivityForResult(intent, RIDE_MAP_REQUEST);
     }
 
     public void drawPoints (ArrayList<LatLng> points) {
-        if (points.size()>0)
+        if (points.size()>0) {
             mMap.addMarker(new MarkerOptions().position(points.get(0)).title(getResources().getString(R.string.start)));
-        if (points.size()<2)
-            return;
-        for (int i=1 ; i<points.size(); i++)
-            mMap.addPolyline((new PolylineOptions()).add(points.get(i-1), points.get(i)).width(5).color(Color.BLUE).geodesic(true));
-        mMap.addMarker(new MarkerOptions().position(points.get(points.size() - 1)).title(getResources().getString(R.string.destiny)));
+        }
+                if (points.size() < 2)
+                    return;
+            if (raiteFlag == false) {
+                for (int i = 1; i < points.size(); i++)
+                    mMap.addPolyline((new PolylineOptions()).add(points.get(i - 1), points.get(i)).width(5).color(Color.BLUE).geodesic(true));
+            }
+                mMap.addMarker(new MarkerOptions().position(points.get(points.size() - 1)).title(getResources().getString(R.string.destiny)));
     }
 
     @Override

@@ -25,11 +25,10 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
 
     //NAVIGATION VIEWS
     Button myProfileButton;
-    Button myExternalProfileButton;
 
     TextView userNameText;
 
-    private ListView rideListView;
+    private ListView rideListView,rideListView2;
     private ArrayList<Ride> userRides;
 
     private static final int USER_RIDE_REQUEST = 1;
@@ -44,7 +43,6 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.user_interface);
 
         myProfileButton = (Button) findViewById(R.id.myProfileButton);
-        myExternalProfileButton = (Button) findViewById(R.id.myExternalProfileButton);
         userNameText = (TextView) findViewById(R.id.userNameTextInterface);
         TabHost tabHost = (TabHost)findViewById(R.id.tabHost);
         tabHost.setup();
@@ -56,16 +54,22 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
 
         tabSpec = tabHost.newTabSpec("Viajes");
         tabSpec.setContent(R.id.viajes);
-        tabSpec.setIndicator("Viajes");
+        tabSpec.setIndicator("Conductor");
+
+        tabHost.addTab(tabSpec);
+
+        tabSpec = tabHost.newTabSpec("Viajes2");
+        tabSpec.setContent(R.id.viajes2);
+        tabSpec.setIndicator("Pasajero");
         tabHost.addTab(tabSpec);
 
 
         reglas = (Button) findViewById(R.id.reglasBtn);
         rideListView = (ListView) findViewById(R.id.rideListView2);
+        rideListView2 = (ListView) findViewById(R.id.rideListView3);
 
         // Listeners
         myProfileButton.setOnClickListener(this);
-        myExternalProfileButton.setOnClickListener(this);
         reglas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,6 +166,7 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
         if (user==null)
             return;
 
+
         userNameText.setText(user.getName());
 
         userRides = user.getRides();
@@ -170,6 +175,7 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
             RideAdapter rideAdapter = new RideAdapter(this, R.layout.item_ride, userRides);
 
             rideListView.setAdapter(rideAdapter);
+            rideListView2.setAdapter(rideAdapter);
 
             rideListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -180,9 +186,26 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
                     Toast.makeText(getBaseContext(), item, Toast.LENGTH_SHORT).show();
                     intent = new Intent(getBaseContext(), RideActivity.class);
                     intent.putExtra("ride", userRides.get(position));
+                    intent.putExtra("conductor", false);
                     startActivityForResult(intent, USER_RIDE_REQUEST);
                 }
             });
+
+            rideListView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ridePosition = position;
+                    Intent intent;
+                    String item = userRides.get(position).getName();
+                    Toast.makeText(getBaseContext(), item, Toast.LENGTH_SHORT).show();
+                    intent = new Intent(getBaseContext(), RideActivity.class);
+                    intent.putExtra("ride", userRides.get(position));
+                    intent.putExtra("conductor", true);
+                    startActivityForResult(intent, USER_RIDE_REQUEST);
+                }
+            });
+
+
         }
     }
 
@@ -191,10 +214,6 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
         Intent intent;
         switch (v.getId()) {
             case R.id.myProfileButton:
-                intent = new Intent(this, UserInterface.class);
-                startActivity(intent);
-                break;
-            case R.id.myExternalProfileButton:
                 intent = new Intent(this, UserActivity.class);
                 startActivity(intent);
                 break;
