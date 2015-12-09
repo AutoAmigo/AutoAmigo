@@ -36,6 +36,21 @@ public class DBRoute {
     public DBRoute (){
     }
 
+    public double[] getLat() {
+        return Lat;
+    }
+
+    public double[] getLng() {
+        return Lng;
+    }
+
+    public String getRouteId() {
+        return routeId;
+    }
+
+    public String getRideId() {
+        return rideId;
+    }
 
     public void create(double[] lat, double[] lng,String rideid){
 

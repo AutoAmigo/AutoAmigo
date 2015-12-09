@@ -29,6 +29,8 @@ public class DBSchedule {
                             //lun,mar,mier,juev,vier,sab,dom
     private boolean[] Days={true,true,true,true,true,true,false};
 
+    private boolean post=true; //get =false
+
     static JSONObject scheduledb;
 
     public DBSchedule (){
@@ -58,6 +60,8 @@ public class DBSchedule {
 
     public void create(String dtime,String atime,String rideid, boolean[] days){
 
+        post=true;
+
         scheduledb = new JSONObject();
         try {
             scheduledb.put("Departure_Time",dtime);  this.departureTime=dtime;
@@ -79,6 +83,29 @@ public class DBSchedule {
           }*/
 
         new HttpAsyncTask().execute(url);
+    }
+
+    public void getByRideId(String rideid){
+
+        post=false;
+
+        String where="";
+
+        try {
+            scheduledb = new JSONObject();
+            scheduledb.put("pckmupTripId",rideid);
+
+            JSONObject w = new JSONObject();
+
+            w.put("where",scheduledb);
+            where=w.toString();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String geturl = url+"/findOne?filter="+where;
+        new HttpAsyncTask().execute(geturl);
     }
 
     public static String daysToString(boolean[] days){
@@ -143,7 +170,7 @@ public class DBSchedule {
                 result = "Did not work!";
 
         } catch (Exception e) {
-            Log.d("InputStream", "El error"+e.toString());
+            Log.d("InputStream", "El error" + e.toString());
         }
 
         return result;
@@ -161,10 +188,41 @@ public class DBSchedule {
 
     }
 
+    private static String GET(String url){
+
+        String result = "";
+
+        try {
+            //
+            URLConnection connection = new URL(url).openConnection();
+            connection.setReadTimeout(20000);
+            connection.setConnectTimeout(25000);
+            connection.setDoInput(true);
+            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            connection.setRequestProperty("Accept", "application/json");
+
+            InputStream response = connection.getInputStream();
+
+            // convert inputstream to string
+            if(response != null)
+                result = convertInputStreamToString(response);
+            else
+                result = "Did not work!";
+
+        } catch (Exception e) {
+            Log.d("InputStream", "El error"+e.toString());
+        }
+
+        return result;
+    }
+
     private class HttpAsyncTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
-            return POST(urls[0]);
+            if(post)
+                return POST(urls[0]);
+            else
+                return GET(urls[0]);
         }
 
         // onPostExecute displays the results of the AsyncTask.
@@ -173,7 +231,12 @@ public class DBSchedule {
 
             try {
                 JSONObject json = new JSONObject(result);
-                scheduleId = json.getString("id");
+      
+                if(post) {
+                    scheduleId = json.getString("id");
+                } else {
+                    Log.d("get","el get "+json.toString());
+                }
 
             }catch (JSONException jex){
                 Log.d("Json exception", jex.getLocalizedMessage());

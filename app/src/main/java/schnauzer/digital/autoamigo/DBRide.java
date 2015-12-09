@@ -24,9 +24,11 @@ import java.net.URLConnection;
 
 public class DBRide {
                                                 //Trip=Ride
-    private String url="https://afternoon-spire-5809.herokuapp.com/api/pckmupTrips"; //cambiarla cuando este hosteado !!
+    private String url="https://afternoon-spire-5809.herokuapp.com/api/pckmupTrips";
 
     private String rideName="",rideUserid="", rideId="";
+
+    private boolean post=true; //get =false
 
     static JSONObject ridedb;
 
@@ -53,6 +55,8 @@ public class DBRide {
 
     public void create(String ridename,String rideuserid){
 
+        post=true;
+
         ridedb = new JSONObject();
         try {
             ridedb.put("TripName",ridename);  this.rideName=ridename;
@@ -68,6 +72,29 @@ public class DBRide {
         }*/
 
         new HttpAsyncTask().execute(url);
+    }
+
+    public void getByUserId(String userid){
+
+        post=false;
+
+        String where="";
+
+        try {
+            ridedb = new JSONObject();
+            ridedb.put("pckmupUserId",userid);
+
+            JSONObject w = new JSONObject();
+
+            w.put("where",ridedb);
+            where=w.toString();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String geturl = url+"/findOne?filter="+where;
+        new HttpAsyncTask().execute(geturl);
     }
 
 
@@ -117,10 +144,41 @@ public class DBRide {
 
     }
 
+    private static String GET(String url){
+
+        String result = "";
+
+        try {
+            //
+            URLConnection connection = new URL(url).openConnection();
+            connection.setReadTimeout(20000);
+            connection.setConnectTimeout(25000);
+            connection.setDoInput(true);
+            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            connection.setRequestProperty("Accept", "application/json");
+
+            InputStream response = connection.getInputStream();
+
+            // convert inputstream to string
+            if(response != null)
+                result = convertInputStreamToString(response);
+            else
+                result = "Did not work!";
+
+        } catch (Exception e) {
+            Log.d("InputStream", "El error"+e.toString());
+        }
+
+        return result;
+    }
+
     private class HttpAsyncTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
-            return POST(urls[0]);
+            if(post)
+                return POST(urls[0]);
+            else
+                return GET(urls[0]);
         }
 
         // onPostExecute displays the results of the AsyncTask.
@@ -129,7 +187,12 @@ public class DBRide {
 
             try {
                 JSONObject json = new JSONObject(result);
-                rideId = json.getString("id");
+
+                if(post) {
+                    rideId = json.getString("id");
+                } else {
+                    Log.d("get","el get "+json.toString());
+                }
 
             }catch (JSONException jex){
                 Log.d("Json exception", jex.getLocalizedMessage());

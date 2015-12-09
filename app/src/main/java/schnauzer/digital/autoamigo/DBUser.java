@@ -33,6 +33,8 @@ public class DBUser {
     private String Password=""; //POST ONLY
     private String userid=""; //READ ONLY
 
+    private boolean post=true; //get =false
+
     static JSONObject userdb;
 
     public DBUser (){
@@ -81,12 +83,12 @@ public class DBUser {
         return userid;
     }
 
-    //getByAuthentication(String email, String password){}
 
     //getRides(){}
 
     public void create(String firstname,String lastname,Calendar bday, String username,
                        String email, String password,String institution,String handicap, String interests){
+        post=true;
 
         userdb = new JSONObject();
         try {
@@ -142,6 +144,29 @@ public class DBUser {
         new HttpAsyncTask().execute(url);
     }
 
+    public void getByEmail(String email){
+
+        post=false;
+
+        String where="";
+
+        try {
+            userdb = new JSONObject();
+            userdb.put("email",email);
+
+            JSONObject w = new JSONObject();
+
+            w.put("where",userdb);
+            where=w.toString();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String geturl = url+"/findOne?filter="+where+"&access_token=1234567890"; //ahorita luego pongo bien el token
+        new HttpAsyncTask().execute(geturl);
+    }
+
 
 
     public static String POST(String url){
@@ -190,10 +215,41 @@ public class DBUser {
 
     }
 
+    private static String GET(String url){
+
+        String result = "";
+
+        try {
+            //
+            URLConnection connection = new URL(url).openConnection();
+            connection.setReadTimeout(20000);
+            connection.setConnectTimeout(25000);
+            connection.setDoInput(true);
+            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            connection.setRequestProperty("Accept", "application/json");
+
+            InputStream response = connection.getInputStream();
+
+            // convert inputstream to string
+            if(response != null)
+                result = convertInputStreamToString(response);
+            else
+                result = "Did not work!";
+
+        } catch (Exception e) {
+            Log.d("InputStream", "El error"+e.toString());
+        }
+
+        return result;
+    }
+
     private class HttpAsyncTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
-            return POST(urls[0]);
+            if(post)
+                return POST(urls[0]);
+            else
+                return GET(urls[0]);
         }
 
         // onPostExecute displays the results of the AsyncTask.
@@ -202,7 +258,12 @@ public class DBUser {
 
             try {
                 JSONObject json = new JSONObject(result);
-                userid = json.getString("id");
+
+                if(post) {
+                    userid = json.getString("id");
+                } else {
+                    Log.d("get","el get "+json.toString());
+                }
 
             }catch (JSONException jex){
                 Log.d("Json exception", jex.getLocalizedMessage());
