@@ -24,6 +24,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
 
     //NAVIGATION VIEWS
     Button myProfileButton;
+    Button myExternalProfileButton;
 
     TextView userNameView;
     TextView cityView;
@@ -54,6 +55,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
 
         // Views
         myProfileButton = (Button) findViewById(R.id.myProfileButton);
+        myExternalProfileButton = (Button) findViewById(R.id.myExternalProfileButton);
         userNameView = (TextView) findViewById(R.id.nameText);
         cityView = (TextView) findViewById(R.id.cityText);
         travelCountView = (TextView) findViewById(R.id.travelsNumber);
@@ -71,6 +73,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
 
         // Listeners
         myProfileButton.setOnClickListener(this);
+        myExternalProfileButton.setOnClickListener(this);
         reviewsButton.setOnClickListener(this);
         postsButton.setOnClickListener(this);
 
@@ -145,8 +148,12 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         switch (v.getId()) {
             case R.id.myProfileButton:
-                /*intent = new Intent(this, UserActivity.class);
-                startActivity(intent);*/
+                intent = new Intent(this, UserInterface.class);
+                startActivity(intent);
+                break;
+            case R.id.myExternalProfileButton:
+                intent = new Intent(this, UserActivity.class);
+                startActivity(intent);
                 break;
             case R.id.reviewsButton:
                 //Toast.makeText(UserActivity.this, "Trying to launch user reviews", Toast.LENGTH_SHORT).show();

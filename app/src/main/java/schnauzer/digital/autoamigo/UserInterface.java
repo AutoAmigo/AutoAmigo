@@ -25,6 +25,7 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
 
     //NAVIGATION VIEWS
     Button myProfileButton;
+    Button myExternalProfileButton;
 
     TextView userNameText;
 
@@ -43,6 +44,7 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.user_interface);
 
         myProfileButton = (Button) findViewById(R.id.myProfileButton);
+        myExternalProfileButton = (Button) findViewById(R.id.myExternalProfileButton);
         userNameText = (TextView) findViewById(R.id.userNameTextInterface);
         TabHost tabHost = (TabHost)findViewById(R.id.tabHost);
         tabHost.setup();
@@ -70,6 +72,7 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
 
         // Listeners
         myProfileButton.setOnClickListener(this);
+        myExternalProfileButton.setOnClickListener(this);
         reglas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -214,6 +217,10 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
         Intent intent;
         switch (v.getId()) {
             case R.id.myProfileButton:
+                intent = new Intent(this, UserInterface.class);
+                startActivity(intent);
+                break;
+            case R.id.myExternalProfileButton:
                 intent = new Intent(this, UserActivity.class);
                 startActivity(intent);
                 break;
