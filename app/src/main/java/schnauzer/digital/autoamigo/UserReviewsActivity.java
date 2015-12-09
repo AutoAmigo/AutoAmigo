@@ -2,6 +2,7 @@ package schnauzer.digital.autoamigo;
 
 import android.content.Intent;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -42,6 +43,11 @@ public class UserReviewsActivity extends AppCompatActivity implements View.OnCli
         myProfileButton.setOnClickListener(this);
 
         setUser(user);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setLogo(R.drawable.logo);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
     }
 
     @Override

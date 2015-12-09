@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    android:background="#c5dfdddd"
+    android:background="#c5eff6f7"
     tools:context=".UserInterface">
         <LinearLayout
         android:orientation="vertical"
@@ -96,17 +96,21 @@
                                     android:layout_marginLeft="15dp"
                                     android:textSize="20dp"
                                     />
-                                <Spinner
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:entries="@array/estado_array"
-                                    android:layout_marginLeft="15dp">
 
-                                </Spinner>
                                 <Switch
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="15dp"/>
+                                    android:layout_marginLeft="15dp"
+                                    android:checked="false"
+                                    android:id="@+id/estadoSwitch"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:text="No Disponible"
+                                    android:textSize="18dp"
+                                    android:id="@+id/estadoTextView" />
                             </LinearLayout>
                             <TextView
                                 android:layout_width="wrap_content"
@@ -117,7 +121,7 @@
                             <EditText
                                 android:layout_width="match_parent"
                                 android:layout_height="150dp"
-                                android:background="#C5CAE9"
+                                android:background="#e5ffffff"
                                 android:layout_marginLeft="15dp"
                                 android:layout_marginRight="15dp"/>
                             <Button
@@ -125,7 +129,7 @@
                                 android:layout_height="50dp"
                                 android:text="Reglas"
                                 android:id="@+id/reglasBtn"
-                                android:background="#C5CAE9"
+                                android:background="#ffbb33"
                                 android:layout_marginLeft="15dp"
                                 android:layout_marginRight="15dp"
                                 android:layout_marginTop="15dp"

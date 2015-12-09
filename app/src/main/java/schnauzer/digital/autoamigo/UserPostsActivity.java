@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Debug;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.Time;
@@ -52,6 +53,10 @@ public class UserPostsActivity extends AppCompatActivity implements View.OnClick
         postEditText = (EditText) findViewById(R.id.postEditText);
         //postButton = (Button) findViewById(R.id.postButton);
         postListView = (ListView) findViewById(R.id.postsListView);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setLogo(R.drawable.logo);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
 
         // Listeners
         myProfileButton.setOnClickListener(this);
@@ -61,6 +66,8 @@ public class UserPostsActivity extends AppCompatActivity implements View.OnClick
         // Post List
         PostAdapter postAdapter = new PostAdapter(this, R.layout.user_post, user.getPosts());
         postListView.setAdapter(postAdapter);
+
+
     }
 
     @Override

@@ -1,6 +1,7 @@
 package schnauzer.digital.autoamigo;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -70,6 +71,11 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         averageRating = (RatingBar) findViewById(R.id.averageRatingBar);
 
         rideListView = (ListView) findViewById(R.id.rideListView);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setLogo(R.drawable.logo);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
 
         // Listeners
         myProfileButton.setOnClickListener(this);

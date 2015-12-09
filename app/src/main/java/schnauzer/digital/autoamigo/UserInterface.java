@@ -3,13 +3,16 @@ package schnauzer.digital.autoamigo;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +31,8 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
     Button myExternalProfileButton;
 
     TextView userNameText;
+    Switch estadoSwitch;
+    TextView estadoTextView;
 
     private ListView rideListView,rideListView2;
     private ArrayList<Ride> userRides;
@@ -69,6 +74,14 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
         reglas = (Button) findViewById(R.id.reglasBtn);
         rideListView = (ListView) findViewById(R.id.rideListView2);
         rideListView2 = (ListView) findViewById(R.id.rideListView3);
+        estadoSwitch = (Switch) findViewById(R.id.estadoSwitch);
+        estadoTextView = (TextView) findViewById(R.id.estadoTextView);
+        estadoSwitch.setChecked(false);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setLogo(R.drawable.logo);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
 
         // Listeners
         myProfileButton.setOnClickListener(this);
@@ -77,6 +90,20 @@ public class UserInterface extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View v) {
                 reglasDialog();
+            }
+        });
+
+        estadoSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,
+                                         boolean isChecked) {
+
+                if (isChecked) {
+                    estadoTextView.setText("Disponible");
+                } else {
+                    estadoTextView.setText("No Disponible");
+                }
+
             }
         });
 

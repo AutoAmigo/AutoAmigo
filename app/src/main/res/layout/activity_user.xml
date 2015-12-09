@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    android:background="#c5dfdddd"
+    android:background="#c5eff6f7"
     tools:context=".UserActivity">
 
     <LinearLayout
@@ -13,157 +13,169 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <LinearLayout
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:id="@+id/userImageView"
-                android:src="@drawable/user"
-                android:layout_gravity="center" />
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="5dp">
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:id="@+id/facebookIcon"
-                    android:src="@drawable/facebook" />
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/userImageView"
+                    android:src="@drawable/user"
+                    android:layout_gravity="center" />
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginLeft="5dp"
-                    android:id="@+id/disabilityIcon"
-                    android:src="@drawable/descapacitado" />
+
+
             </LinearLayout>
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:id="@+id/facebookIcon"
+                        android:src="@drawable/facebook" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/disabilityIcon"
+                        android:src="@drawable/descapacitado" />
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/defaultName"
+                    android:ems="10"
+                    android:id="@+id/nameText"/>
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/defaultCity"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/cityText"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/totalTravels" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/defaultTotalTravelsNumber"
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/travelsNumber"/>
+
+                </LinearLayout>
+                <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/averageRatingBar"
+                    android:stepSize="0.1"
+                    android:numStars="5" />
+            </LinearLayout>
         </LinearLayout>
 
+
+
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp">
-
-            <TextView
-                android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:gravity="center">
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/defaultName"
-                android:ems="10"
-                android:id="@+id/nameText"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/defaultCity"
-                android:layout_marginTop="5dp"
-                android:id="@+id/cityText"/>
+                android:text="Reviews"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/reviewsButton" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Button"
+                android:text="Mapa"
                 android:id="@+id/buttonMap"
-                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="180dp"
                 android:onClick="openMap" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/totalTravels" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/defaultTotalTravelsNumber"
-                    android:layout_marginLeft="5dp"
-                    android:id="@+id/travelsNumber"/>
-            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <include
+                android:layout_width="320dp"
+                android:layout_height="85dp"
+                layout="@layout/user_post"
+                android:layout_gravity="center_horizontal"/>
+
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:text=">"
+                android:id="@+id/postsButton"/>
+        </LinearLayout>
+
         <TextView
-            android:layout_width="80dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:layout_gravity="center_vertical"
-            android:text="@string/average"/>
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/averageRatingBar"
-            android:stepSize="0.1"
-            android:numStars="5" />
-        <Button
-            android:layout_width="40dp"
-            android:layout_height="50dp"
-            android:text=">"
-            android:id="@+id/reviewsButton" />
-    </LinearLayout>
+            android:layout_marginTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/rides"
+            android:textColor="@color/grey"
+            android:ems="10"/>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-        <include
-            android:layout_width="320dp"
-            android:layout_height="85dp"
-            layout="@layout/user_post"
-            android:layout_gravity="center_horizontal"/>
-
-        <Button
-            android:layout_width="40dp"
-            android:layout_height="50dp"
-            android:text=">"
-            android:id="@+id/postsButton"/>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/rides"
-        android:textColor="@color/grey"
-        android:ems="10"/>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical">
-        <ListView
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/rideListView"/>
-    </LinearLayout>
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></LinearLayout>
+
+            <ListView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/rideListView"/>
+        </LinearLayout>
     </LinearLayout>
 
     <include

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -105,6 +106,11 @@ public class RideActivity extends AppCompatActivity implements DialogInterface.O
         friday = (TextView) findViewById(R.id.friday);
         saturday = (TextView) findViewById(R.id.saturday);
         sunday = (TextView) findViewById(R.id.sunday);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setLogo(R.drawable.logo);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
 
         if (ride.getName().length()>0)
             rideNameEditText.setText(ride.getName());

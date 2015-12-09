@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -63,6 +64,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             View v = this.findViewById(android.R.id.content);
             undoButton.setVisibility(v.INVISIBLE);
         }
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setLogo(R.drawable.logo);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+
     }
 
     @Override
