@@ -29,15 +29,17 @@ public class DBRoute {
     private double[] Lat=null,Lng=null;
     private String routeId="", rideId="";
 
+    private boolean post=true; //get =false
+
     static JSONObject routedb;
 
     public DBRoute (){
     }
 
 
-    //getById(){}
-
     public void create(double[] lat, double[] lng,String rideid){
+
+        post=true;
 
         routedb = new JSONObject();
         JSONArray array=new JSONArray();
@@ -71,8 +73,31 @@ public class DBRoute {
         new HttpAsyncTask().execute(url);
     }
 
+    public void getByRideId(String rideid){
 
-    public static String POST(String url){
+        post=false;
+
+        String where="";
+
+        try {
+            routedb = new JSONObject();
+            routedb.put("pckmupTripId",rideid);
+
+            JSONObject w = new JSONObject();
+
+            w.put("where",routedb);
+            where=w.toString();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String geturl = url+"/findOne?filter="+where;
+        new HttpAsyncTask().execute(geturl);
+    }
+
+
+    private static String POST(String url){
 
         String result = "";
 
@@ -118,10 +143,45 @@ public class DBRoute {
 
     }
 
+
+    private static String GET(String url){
+
+        String result = "";
+
+        try {
+            //
+            URLConnection connection = new URL(url).openConnection();
+            connection.setReadTimeout(20000);
+            connection.setConnectTimeout(25000);
+            connection.setDoInput(true);
+            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            connection.setRequestProperty("Accept", "application/json");
+
+            InputStream response = connection.getInputStream();
+
+            // convert inputstream to string
+            if(response != null)
+                result = convertInputStreamToString(response);
+            else
+                result = "Did not work!";
+
+        } catch (Exception e) {
+            Log.d("InputStream", "El error"+e.toString());
+        }
+
+        return result;
+    }
+
+
     private class HttpAsyncTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
-            return POST(urls[0]);
+
+            if(post)
+                return POST(urls[0]);
+            else
+                return GET(urls[0]);
+
         }
 
         // onPostExecute displays the results of the AsyncTask.
@@ -130,11 +190,18 @@ public class DBRoute {
 
             try {
                 JSONObject json = new JSONObject(result);
-                routeId = json.getString("id");
 
-            }catch (JSONException jex){
+                if(post) {
+                        routeId = json.getString("id");
+                } else {
+                    Log.d("get","el get "+json.toString());
+                }
+
+            } catch (JSONException jex) {
                 Log.d("Json exception", jex.getLocalizedMessage());
             }
+
+
         }
     }
 }

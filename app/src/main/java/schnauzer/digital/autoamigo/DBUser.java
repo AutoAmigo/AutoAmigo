@@ -81,7 +81,7 @@ public class DBUser {
         return userid;
     }
 
-    //getById(){}
+    //getByAuthentication(String email, String password){}
 
     //getRides(){}
 
