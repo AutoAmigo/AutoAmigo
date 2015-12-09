@@ -27,6 +27,12 @@
                 android:text="@string/myProfile"
                 android:id="@+id/myProfileButton"
                 android:layout_gravity="center_horizontal" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/myProfile"
+                android:id="@+id/myExternalProfileButton"
+                android:layout_gravity="center_horizontal" />
 
         </LinearLayout>
     </ScrollView>
