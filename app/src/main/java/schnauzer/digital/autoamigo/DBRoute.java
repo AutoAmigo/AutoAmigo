@@ -26,7 +26,8 @@ public class DBRoute {
 
     private String url="https://afternoon-spire-5809.herokuapp.com/api/pckmupRoutes";
 
-    private double[] Lat=null,Lng=null;
+    private double[] Lat=new double[50];
+    private double[] Lng=new double[50];
     private String routeId="", rideId="";
 
     private boolean post=true; //get =false
@@ -93,6 +94,8 @@ public class DBRoute {
         post=false;
 
         String where="";
+        Lat=new double[50];
+        Lng=new double[50];
 
         try {
             routedb = new JSONObject();
@@ -110,6 +113,7 @@ public class DBRoute {
         String geturl = url+"/findOne?filter="+where;
         new HttpAsyncTask().execute(geturl);
     }
+
 
 
     private static String POST(String url){
@@ -210,10 +214,24 @@ public class DBRoute {
                         routeId = json.getString("id");
                 } else {
                     Log.d("get","el get "+json.toString());
+
+                    JSONArray latlng = json.getJSONArray("LatLng");
+
+                    for (int i = 0; i < latlng.length(); ++i) {
+                        JSONObject rut = latlng.getJSONObject(i);
+                        Lat[i] = rut.getDouble("lat");
+                        Lng[i] = rut.getDouble("lng");
+                    }
+
+                    rideId=json.getString("pckmupTripId"); //trip=ride
+                    routeId=json.getString("id");
+
                 }
 
             } catch (JSONException jex) {
                 Log.d("Json exception", jex.getLocalizedMessage());
+            } catch (Exception ex){
+                ex.printStackTrace();
             }
 
 

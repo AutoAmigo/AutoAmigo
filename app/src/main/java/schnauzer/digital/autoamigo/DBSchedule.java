@@ -128,7 +128,7 @@ public class DBSchedule {
 
         try {
             for (int i = 0; i < result.length; i++) {
-                for(int j=0;j<ds.length;j++){
+                for(int j=0;j<ds.length - 1;j++){
                     if(Integer.valueOf(ds[j])==i){
                         result[i]=true;
                     }
@@ -236,6 +236,15 @@ public class DBSchedule {
                     scheduleId = json.getString("id");
                 } else {
                     Log.d("get","el get "+json.toString());
+
+                    departureTime=json.getString("Departure_Time");
+                    arrivalTime=json.getString("Arrival_Time");
+                    scheduleId=json.getString("id");
+                    rideId=json.getString("pckmupTripId"); //trip=ride
+
+                    boolean[] ds=daysToBool(json.getString("Days"));
+                    Days=ds;
+
                 }
 
             }catch (JSONException jex){

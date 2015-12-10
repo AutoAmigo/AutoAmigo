@@ -20,8 +20,10 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class DBUser {
 
@@ -163,7 +165,7 @@ public class DBUser {
             e.printStackTrace();
         }
 
-        String geturl = url+"/findOne?filter="+where+"&access_token=1234567890"; //ahorita luego pongo bien el token
+        String geturl = url+"/findOne?filter="+where+"&access_token=3SSMdRFpWvC1923jjlCuhMSMTxhmsunTeUd0VxBvoZYSCMCNfHnK8SPQLX3fbyqk";
         new HttpAsyncTask().execute(geturl);
     }
 
@@ -262,13 +264,70 @@ public class DBUser {
                 if(post) {
                     userid = json.getString("id");
                 } else {
-                    Log.d("get","el get "+json.toString());
+                    Log.d("get", "el get " + json.toString());
+                    //
+                    firstName=json.getString("FirstName");
+                    lastName=json.getString("LastName");
+                    userid=json.getString("id");
+
+                    String bday=json.getString("BirthDay");
+                    birthDay=parseDate(bday);
+
+                    userName=json.getString("UserName");
+                    Email=json.getString("email");
+
+                    if(json.has("Institution"))
+                        institution=json.getString("Institution");
+                    else
+                        institution="";
+
+                    if(json.has("Handicap"))
+                        handicap=json.getString("Handicap");
+                    else
+                        handicap="";
+
+                    if(json.has("Interests"))
+                        interests=json.getString("Interests");
+                    else
+                        interests="";
+
                 }
 
             }catch (JSONException jex){
                 Log.d("Json exception", jex.getLocalizedMessage());
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
         }
     }
+
+    /////////////////////
+    private Calendar parseDate( String input ) throws java.text.ParseException {
+
+        //NOTE: SimpleDateFormat uses GMT[-+]hh:mm for the TZ which breaks
+        //things a bit.  Before we go on we have to repair this.
+        SimpleDateFormat df = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ssz" );
+
+        //this is zero time so we need to add that TZ indicator for
+        if ( input.toLowerCase().endsWith("Z") ) {
+            input = input.substring( 0, input.length() - 1) + "GMT-00:00";
+        } else {
+            int inset = 6;
+
+            String s0 = input.substring( 0, input.length() - inset );
+            String s1 = input.substring( input.length() - inset, input.length() );
+
+            input = s0 + "GMT" + s1;
+        }
+
+         Date date =df.parse( input );
+         Calendar cal = Calendar.getInstance();
+         cal.setTime(date);
+
+        return cal;
+
+    }
+
+    /////////////////////
 
 }

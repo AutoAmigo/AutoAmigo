@@ -192,6 +192,10 @@ public class DBRide {
                     rideId = json.getString("id");
                 } else {
                     Log.d("get","el get "+json.toString());
+
+                    rideName=json.getString("TripName"); //trip=ride
+                    rideUserid=json.getString("pckmupUserId");
+                    rideId=json.getString("id");
                 }
 
             }catch (JSONException jex){
